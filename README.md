@@ -4,9 +4,7 @@ Email Validator Service in PHP. Can be used to validate if email exists on mail 
 
 #### Usage
 
-Must be run like a service. Calling address like this http://domain.com/validate.php?q=name@domain.com
-
-Next you can get result using an ajax call in jQuery:
+Must be run like a service. Calling address like this http://domain.com/validate.php?q=name@domain.com next you can get result using an ajax call in jQuery:
 
     $.ajax({
 	  url: "http://domain.com/validate.php",
