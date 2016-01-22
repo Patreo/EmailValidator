@@ -83,6 +83,10 @@
 				break;
 		}
 		
+		if (empty($msg)) {
+			$msg = substr($buffer, 3);
+		}
+		
 		return $code;
 	}
 
