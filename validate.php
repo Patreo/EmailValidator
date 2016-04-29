@@ -118,7 +118,7 @@
 			// Connect to Telnet	
 			$socket = fsockopen($ip, 25, $errno, $errstr); 
 			if (!$socket) { 
-				$result["connection"] = array("error" => "400", "message" => "Can't connect to server $ip in port 25");
+				$result["connection"] = array("connected" => false, "error" => "400", "message" => "Can't connect to server $ip in port 25");
 			} else {
 				if (parseTelnetMsg(fgets($socket, 4096), $msg) != 220) {
 					$result["connection"] = array("error" => "400", "message" => $msg);
@@ -139,9 +139,9 @@
 					
 					// Check if email is valid
 					if ($from_result == 250 && $to_result == 250) {
-						$result["connection"] = true;
+						$result["connection"] = array("connected" => true);
 					} else {
-						$result["connection"] = array("error" => $to_result, "message" => $msg);
+						$result["connection"] = array("connected" => false, "error" => $to_result, "message" => $msg);
 					}
 					
 					// Send QUIT command
@@ -158,7 +158,7 @@
 		$result["connection"] = false;
 	}
 	
-	if ($result["format"] == true && $result["connection"] == true) {
+	if ($result["format"] == true && $result["connection"]["connected"] == true) {
 		$result["is_valid"] = true;
 	} else {
 		$result["is_valid"] = false;
